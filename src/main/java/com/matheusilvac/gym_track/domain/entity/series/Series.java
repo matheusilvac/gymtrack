@@ -4,11 +4,15 @@ import com.matheusilvac.gym_track.domain.entity.exercicio.Exercicio;
 import com.matheusilvac.gym_track.domain.enums.tipoSerieEnum.TipoSerieEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Entity
 @Table(name = "series")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Series {
