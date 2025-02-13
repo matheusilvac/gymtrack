@@ -6,19 +6,19 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CardioDTO {
-
+public class CardioResponse {
+    private Double pace;
     private Integer tempo;
     private Double km;
     private String modalidadeCardio;
 
-    public CardioDTO(Cardio cardio) {
+    public CardioResponse(Cardio cardio) {
         this.tempo = cardio.getTempo();
         this.km = cardio.getKm();
         this.modalidadeCardio = cardio.getModalidadeCardio().name();
-
+        this.pace = cardio.getPace();
     }
 
-    public CardioDTO() {
+    public CardioResponse() {
     }
 }
