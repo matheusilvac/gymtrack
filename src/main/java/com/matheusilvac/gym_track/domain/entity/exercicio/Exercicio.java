@@ -1,5 +1,6 @@
 package com.matheusilvac.gym_track.domain.entity.exercicio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matheusilvac.gym_track.domain.entity.series.Series;
 import com.matheusilvac.gym_track.domain.entity.treino.Treino;
 import jakarta.persistence.*;
@@ -15,19 +16,24 @@ import java.util.List;
 @Table(name = "exercicios")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Exercicio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    private String nomeExercicio;
 
     @ManyToOne
     @JoinColumn(name = "treino_id")
+    @JsonIgnore
     private Treino treino;
 
-    @OneToMany(mappedBy = "exercicio", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "exercicio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Series> series;
+
+    public Exercicio() {
+    }
+
+
 }

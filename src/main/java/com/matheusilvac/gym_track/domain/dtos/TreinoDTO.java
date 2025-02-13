@@ -6,6 +6,7 @@ import java.util.List;
 
 public record TreinoDTO(
         LocalDateTime data,
+        String nome,
         List<ExercicioDTO> exercicios,
         CardioDTO cardio
 ) {
