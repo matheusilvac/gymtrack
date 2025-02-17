@@ -37,11 +37,10 @@ public class TreinoService {
 
     // Criar treino temporário
     public Treino criarTreinoTemporario(String nome) {
-        // Criar um treino temporário (não finalizado)
         Treino treino = new Treino();
         treino.setNome(nome);
-        treino.setData(LocalDateTime.now());  // Data de criação do treino
-        treino.setFinalizado(false);  // O treino ainda está em progresso
+        treino.setData(LocalDateTime.now());
+        treino.setFinalizado(false);
         treinoRepository.save(treino);
         return treino;
     }
