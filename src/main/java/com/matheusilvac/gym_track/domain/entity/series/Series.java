@@ -9,16 +9,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 
 @Entity
 @Table(name = "series")
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Series {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Enumerated(EnumType.STRING)
     private TipoSerieEnum tipoSerieEnum;
@@ -31,46 +34,4 @@ public class Series {
     @JsonIgnore
     private Exercicio exercicio;
 
-    public Series() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public TipoSerieEnum getTipoSerieEnum() {
-        return tipoSerieEnum;
-    }
-
-    public void setTipoSerieEnum(TipoSerieEnum tipoSerieEnum) {
-        this.tipoSerieEnum = tipoSerieEnum;
-    }
-
-    public Integer getRepeticao() {
-        return repeticao;
-    }
-
-    public void setRepeticao(Integer repeticao) {
-        this.repeticao = repeticao;
-    }
-
-    public Integer getCarga() {
-        return carga;
-    }
-
-    public void setCarga(Integer carga) {
-        this.carga = carga;
-    }
-
-    public Exercicio getExercicio() {
-        return exercicio;
-    }
-
-    public void setExercicio(Exercicio exercicio) {
-        this.exercicio = exercicio;
-    }
 }

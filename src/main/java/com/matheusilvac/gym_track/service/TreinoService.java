@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 public class TreinoService {
@@ -45,13 +46,13 @@ public class TreinoService {
         return treino;
     }
 
-    public Page<Treino> obterTodos(Pageable paginacao){
+    public Page<Treino> obterTodos(Pageable paginacao) {
         return treinoRepository.findAllByOrderByDataAsc(paginacao);
     }
 
     @Transactional
     // Adicionar exercício ao treino
-    public Exercicio adicionarExercicio(Long treinoId, ExercicioDTO exercicioDTO) {
+    public Exercicio adicionarExercicio(UUID treinoId, ExercicioDTO exercicioDTO) {
         Treino treino = treinoRepository.findById(treinoId).orElseThrow(() -> new RuntimeException("Treino não encontrado"));
 
         if (treino.isFinalizado()) {
@@ -79,7 +80,7 @@ public class TreinoService {
 
     //adicionar cardio
     @Transactional
-    public Cardio adicionarCardio(Long treinoId, CardioDTO cardioDTO){
+    public Cardio adicionarCardio(UUID treinoId, CardioDTO cardioDTO) {
         Treino treino = treinoRepository.findById(treinoId).orElseThrow(() -> new RuntimeException("Treino não encontrado"));
         if (treino.isFinalizado()) {
             throw new RuntimeException("Não é possível adicionar exercício a um treino finalizado.");
@@ -104,7 +105,7 @@ public class TreinoService {
 
 
     // Finalizar treino
-    public Treino finalizarTreino(Long treinoId) {
+    public Treino finalizarTreino(UUID treinoId) {
         Treino treino = treinoRepository.findById(treinoId).orElseThrow(() -> new RuntimeException("Treino não encontrado"));
 
         if (treino.isFinalizado()) {
@@ -113,10 +114,12 @@ public class TreinoService {
 
         treino.setFinalizado(true);
         treinoRepository.save(treino);
+
+
         return treino;
     }
 
-    public void excluirTreino(Long id) {
+    public void excluirTreino(UUID id) {
         treinoRepository.deleteById(id);
     }
 }

@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/treinos")
@@ -42,15 +43,15 @@ public class TreinoController {
 
     // Endpoint para adicionar um exercício a um treino
     @PostMapping("/{treinoId}/exercicio")
-    public ResponseEntity<ExercicioDTO> adicionarExercicio(@PathVariable Long treinoId,
-                                                        @RequestBody ExercicioDTO exercicioDTO) {
+    public ResponseEntity<ExercicioDTO> adicionarExercicio(@PathVariable UUID treinoId,
+                                                           @RequestBody ExercicioDTO exercicioDTO) {
         Exercicio exercicio = treinoService.adicionarExercicio(treinoId, exercicioDTO);
         return new ResponseEntity<>(new ExercicioDTO(exercicio), HttpStatus.CREATED);
     }
 
     // Endpoint para adicionar um cardio a um treino
     @PostMapping("/{treinoId}/cardio")
-    public ResponseEntity<CardioResponse> adicionarCardio(@PathVariable Long treinoId,
+    public ResponseEntity<CardioResponse> adicionarCardio(@PathVariable UUID treinoId,
                                                           @RequestBody CardioDTO cardioDTO) {
         Cardio cardio = treinoService.adicionarCardio(treinoId, cardioDTO);
         return new ResponseEntity<>(new CardioResponse(cardio), HttpStatus.CREATED);
@@ -58,13 +59,13 @@ public class TreinoController {
 
     // Endpoint para finalizar um treino
     @PutMapping("/{treinoId}/finalizar")
-    public ResponseEntity<Treino> finalizarTreino(@PathVariable Long treinoId) {
+    public ResponseEntity<Treino> finalizarTreino(@PathVariable UUID treinoId) {
         Treino treino = treinoService.finalizarTreino(treinoId);
         return new ResponseEntity<>(treino, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<TreinoDTO> remover(@PathVariable @NotNull Long id) {
+    public ResponseEntity<TreinoDTO> remover(@PathVariable @NotNull UUID id) {
         treinoService.excluirTreino(id);
         return ResponseEntity.noContent().build();
     }

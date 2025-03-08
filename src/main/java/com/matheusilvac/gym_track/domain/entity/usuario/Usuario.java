@@ -10,7 +10,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "treinos")
+@Table(name = "usuarios")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -32,6 +32,6 @@ public class Usuario {
     private Double peso;
     private Double altura;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Treino> treinos;
 }

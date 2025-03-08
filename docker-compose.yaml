@@ -1,0 +1,21 @@
+services:
+  api:
+    image: gymtrack
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:latest
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1211
+      POSTGRES_DB: gymtrack-db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d gymtrack-db" ]
+      interval: 5s
+      retries: 5
+      start_period: 10s
